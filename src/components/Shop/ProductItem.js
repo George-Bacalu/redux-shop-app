@@ -1,14 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/cart-slice";
 import Card from "../UI/Card";
 import classes from "./ProductItem.module.css";
 
 const ProductItem = props => {
   const dispatch = useDispatch();
-  const cart = useSelector(state => state.cartReducer);
+  // const cart = useSelector(state => state.cartReducer);
   const { id, title, price, description } = props;
 
   const addToCartHandler = () => {
+    dispatch(cartActions.addItemToCart({ id, title, price }));
+    /*
     const newTotalQuantity = cart.totalQuantity + 1;
     const updatedItems = cart.items.slice(); // create copy via slice to avoid mutating the original state
     const existingItem = updatedItems.find(item => item.id === id);
@@ -23,10 +25,10 @@ const ProductItem = props => {
     }
     const newCart = { totalQuantity: newTotalQuantity, items: updatedItems };
     dispatch(cartActions.replaceCart(newCart));
+    */
 
     // and then send HTTP request
     // fetch("https://http-requests-ebdd0-default-rtdb.firebaseio.com/cart.json", { method: "PUT", body: JSON.stringify(newCart) });
-    // dispatch(cartActions.addItemToCart({ id, title, price }));
   };
 
   return (
