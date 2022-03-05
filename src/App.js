@@ -4,7 +4,7 @@ import Cart from "./components/Cart/Cart";
 import Layout from "./components/Layout/Layout";
 import Products from "./components/Shop/Products";
 import Notification from "./components/UI/Notification";
-import { sendCartData } from "./store/cart-slice";
+import { fetchCartData, sendCartData } from "./store/cart-actions";
 
 let isInitialRender = true;
 
@@ -14,12 +14,14 @@ const App = () => {
   const notification = useSelector(state => state.uiReducer.notification);
   const cart = useSelector(state => state.cartReducer);
 
+  useEffect(() => dispatch(fetchCartData()), [dispatch]);
+
   useEffect(() => {
     if (isInitialRender) {
       isInitialRender = false;
       return;
     }
-    dispatch(sendCartData(cart));
+    if (cart.changed) dispatch(sendCartData(cart));
   }, [cart, dispatch]);
 
   return (
