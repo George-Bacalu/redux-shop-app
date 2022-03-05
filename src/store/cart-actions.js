@@ -33,7 +33,8 @@ export const fetchCartData = () => {
 
     try {
       const cartData = await fetchRequest();
-      dispatch(cartActions.replaceCart({ items: cartData.items || [], totalQuantity: cartData.totalQuantity })); // replaceCart reducer replaces our frontend cart with the cart we are loading from firebase
+      dispatch(cartActions.replaceCart({ items: cartData.items || [], totalQuantity: cartData.totalQuantity }));
+      // replaceCart reducer replaces our frontend cart with the cart we are loading from firebase
     } catch (err) {
       dispatch(uiActions.showNotification({ status: "error", title: "Error!", message: "Fetching cart data failed!" }));
     }

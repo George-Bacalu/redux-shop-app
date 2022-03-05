@@ -10,3 +10,13 @@
   margin: 0;
   padding: 0;
 }
+
+.products .content {
+  text-align: center;
+  color: white;
+  font-size: 1rem;
+}
+
+.products .error {
+  color: red;
+}
